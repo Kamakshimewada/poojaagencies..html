@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .carousel {
+      display: flex;
+      overflow: hidden;
+      width: 300px; /* Set your desired width */
+      margin: auto;
+    }
+
+    .carousel-container {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      width: 100%;
+      flex: 0 0 auto;
+      box-sizing: border-box;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="carousel">
+  <button class="prev" onclick="prevSlide()">Previous</button>
+  <div class="carousel-container" id="carouselContainer">
+    <div class="carousel-item" style="background-color: #ff6347;">1</div>
+    <div class="carousel-item" style="background-color: #98fb98;">2</div>
+    <div class="carousel-item" style="background-color: #dda0dd;">3</div>
+    <!-- Add more items as needed -->
+  </div>
+  <button class="next" onclick="nextSlide()">Next</button>
+</div>
+
+<script>
+  let currentIndex = 0;
+  const totalItems = document.querySelectorAll('.carousel-item').length;
+  const container = document.getElementById('carouselContainer');
+
+  function showSlide(index) {
+    if (index < 0) {
+      index = totalItems - 1;
+    } else if (index >= totalItems) {
+      index = 0;
+    }
+
+    currentIndex = index;
+    const translateValue = -index * 100 + '%';
+    container.style.transform = 'translateX(' + translateValue + ')';
+  }
+
+  function prevSlide() {
+    showSlide(currentIndex - 1);
+  }
+
+  function nextSlide() {
+    showSlide(currentIndex + 1);
+  }
+</script>
+
+</body>
+</html>
